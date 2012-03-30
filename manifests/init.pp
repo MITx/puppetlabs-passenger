@@ -17,6 +17,7 @@
 #
 class passenger {
   include passenger::params
+  include apache
   require ruby::dev
   require gcc
   require apache::dev
@@ -34,5 +35,22 @@ class passenger {
     logoutput => true,
     creates => $passenger::params::mod_passenger_location,
     require => Package['passenger'],
+  }
+
+  case $::operatingsystem {
+    'ubuntu', 'debian': {
+      file { "/etc/apache2/mods-available/passenger.load":
+        ensure   => present,
+        content  => template("passenger/passenger.load.erb"),
+        owner    => "root",
+        group    => "root",
+        mode     => 0644
+      }
+
+      a2mod { "passenger":
+        ensure  => present,
+        require => File["/etc/apache2/mods-available/passenger.load"]
+      }
+    }
   }
 }

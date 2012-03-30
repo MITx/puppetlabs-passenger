@@ -17,17 +17,16 @@ class passenger::params {
     'ubuntu', 'debian': {
       $gem_path = '/var/lib/gems/1.8/gems/'
       $gem_binary_path = '/var/lib/gems/1.8/bin'
-      $mod_passenger_location = "/var/lib/gems/1.8/gems/passenger-$version/ext/apache2/mod_passenger.so"
     }
     'centos', 'fedora', 'redhat': {
       $gem_path = '/usr/lib/ruby/gems/1.8/gems'
       $gem_binary_path = '/usr/lib/ruby/gems/1.8/gems/bin'
-      $mod_passenger_location = "/usr/lib/ruby/gems/1.8/gems/passenger-$version/ext/apache2/mod_passenger.so"
     }
     'darwin':{
       $gem_path = '/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin'
       $gem_binary_path = '/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin'
-      $mod_passenger_location = "/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/passenger-$version/ext/apache2/mod_passenger.so" 
     }
   }
+  $passenger_gem_path = "$gem_path/passenger-$version"
+  $mod_passenger_location = "$passenger_gem_path/ext/apache2/mod_passenger.so"
 }
