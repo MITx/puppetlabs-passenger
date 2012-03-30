@@ -15,7 +15,7 @@ class passenger::params {
   
   case $::operatingsystem {
     'ubuntu', 'debian': {
-      $gem_path = '/var/lib/gems/1.8/gems/'
+      $gem_path = '/var/lib/gems/1.8/gems'
       $gem_binary_path = '/var/lib/gems/1.8/bin'
     }
     'centos', 'fedora', 'redhat': {
